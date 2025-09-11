@@ -24,7 +24,7 @@ const Button = forwardRef(
       ghost: "bg-transparent text-blue-600 hover:bg-blue-100",
     };
 
-    const classes = `button relative  inline-flex items-center justify-center rounded h-11 transition-colors hover:text-color-1 bg-n-1 hover:bg-n-8 focus:bg-n-8 active:bg-n-8 ${
+    const classes = `button cursor-pointer relative inline-flex items-center justify-center rounded h-11 transition-colors hover:text-color-1 bg-n-1 hover:bg-n-8 focus:bg-n-8 hover:underline active:bg-n-8 ${
       px || "px-7"
     } ${white ? "text-n-8" : "text-n-1"} ${className || ""} ${
       variantClasses[variant]
@@ -60,7 +60,7 @@ const Button = forwardRef(
           el.removeEventListener('mouseenter', () => {null});
           el.removeEventListener('mouseleave', () => {null});
         }
-      })
+      },[ref])
     
 
     const renderButton = () => (
