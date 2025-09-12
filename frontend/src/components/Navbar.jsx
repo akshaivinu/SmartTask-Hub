@@ -29,7 +29,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="items-center h-20 w-full flex justify-between text-[16px] md:px-18 container mx-auto select-none">
+      <nav className="items-center h-20 w-full flex justify-between text-[16px] px-5 md:px-18 container mx-auto select-none">
           <h1 className="font-bold">Task Manager</h1>
           <div className="hidden md:flex">
             <ul className="flex flex-row gap-8">
