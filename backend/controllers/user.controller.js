@@ -72,3 +72,12 @@ export const logoutUser = async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
+
+export const authCheck = async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id).select("-password");
+    res.status(200).json({ data: user });
+  } catch (error) {
+    console.log("Error checking authentication", error.message); 
+  }
+}

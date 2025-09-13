@@ -1,11 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TaskItem from "../components/TaskItem";
 import { Plus } from "lucide-react";
 import Task from "../components/Task";
+import taskService from "../services/taskService";
 
 const TaskPage = () => {
   const [isEdit, setIsEdit] = React.useState(true);
   const [tasks, setTasks] = useState([]);
+
+  useEffect(() => {
+    taskService.getTasks().then((res) => {
+      setTasks(res);
+    })
+  })
+  console.log("tasks", tasks);
+  
 
   return (
     <div className="container mx-auto mt-10">
