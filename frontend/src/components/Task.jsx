@@ -2,10 +2,15 @@ import React from "react";
 import taskService from "../services/taskService";
 import LoadingSpinner from "./LoadingSpinner";
 
-const Task = ({ isEdit, setIsEdit, tasks, setTaskId, setTasks, isLoading }) => {
+const Task = ({ isEdit, setIsEdit, tasks, setTaskId, setTasks, isLoading, setDisabled, disabled }) => {
   return (
     <>
-    { isLoading ? <div className="flex w-screen h-screen justify-center items-center"><LoadingSpinner /></div>  : <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 px-[30px] lg:px-[100px]">
+    { isLoading ? 
+    <div className="flex w-screen h-screen justify-center items-center">
+      <LoadingSpinner />
+    </div>  
+    : 
+    <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 px-[30px] lg:px-[100px]">
         {tasks?.map((task) => (
           <div
             key={task._id || task.id}
@@ -53,8 +58,9 @@ const Task = ({ isEdit, setIsEdit, tasks, setTaskId, setTasks, isLoading }) => {
                 </select>
               </div>
               <div className="flex flex-row items-center">
-                <button
-                  className="mr-2 text-red-600 text-xs p-1 md:text-[16px] cursor-pointer hover:scale-110 duration-300 power-in-out"
+                <button 
+                disabled={disabled}
+                  className={`mr-2 text-red-600 text-xs p-1 md:text-[16px] cursor-pointer hover:scale-110 duration-300 power-in-out ${disabled ? "opacity-50 cursor-not-allowed" : ""}`}
                   onClick={() => {
                     setIsEdit(!isEdit);
                     setTaskId(task._id);
@@ -63,16 +69,18 @@ const Task = ({ isEdit, setIsEdit, tasks, setTaskId, setTasks, isLoading }) => {
                   Edit
                 </button>
                 <button
-                  className="mr-2 text-red-600 text-xs p-1 md:text-[16px] cursor-pointer hover:scale-110 duration-300 power-in-out"
+                  className={`mr-2 text-red-600 text-xs p-1 md:text-[16px] cursor-pointer hover:scale-110 duration-300 power-in-out ${disabled ? "opacity-50 cursor-not-allowed" : ""}`}
+                  disabled={disabled}
                   onClick={async () => {
                     await taskService.deleteTask(task._id);
                     const updatedTasks = await taskService.getTasks();
                     setTasks(updatedTasks);
                   }}
+
                 >
                   Delete
                 </button>
-                <input type="checkbox" name="complete" className="mr-1"
+                <input type="checkbox" defaultChecked={task.status === "completed"} name="complete" className="mr-1"
                 {...task.status === "completed" ? { checked: true } : { checked: false }}
                 onClick={async (e) => {
                   const newStatus = e.target.checked ? "completed" : "pending";

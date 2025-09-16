@@ -11,6 +11,7 @@ const TaskPage = () => {
   const [taskId, setTaskId] = useState("");
   const [selectedTask, setSelectedTask] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [disabled, setDisabled] = useState(false);
 
   useEffect(() => {
     const fetchTasks = async () => {
@@ -44,7 +45,7 @@ const TaskPage = () => {
       <h1 className="text-4xl font-bold text-center">Tasks</h1>
       <div className="">
         <button
-          className="flex items-center gap-2 absolute right-8 top-38 md:right-25 md:top-35  bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
+          className={`${isEditing ? "hidden" : ""} flex items-center gap-2 absolute right-8 top-38 md:right-25 md:top-35  bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition`}
           onClick={async () => {
             const newTask = {
               title: `Task ${tasks.length + 1}`,
@@ -76,6 +77,8 @@ const TaskPage = () => {
             setTasks={setTasks}
             setTaskId={setTaskId}
             isLoading={isLoading}
+            setDisabled={setDisabled}
+            disabled={disabled}
           />
         )}
       </div>

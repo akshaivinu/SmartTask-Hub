@@ -52,8 +52,9 @@ const TaskItem = ({ setIsEditing, selectedTask: task, setTasks }) => {
   };
 
   return (
-    <div className="container mx-auto">
-      <form className="bg-slate-400 p-4 rounded" onSubmit={handleSave}>
+    <div className="container mx-auto mt-10">
+      <div className="w-[300px] md:w-[580px] mx-auto">
+      <form className="bg-slate-400 p-4 rounded w-auto h-auto" onSubmit={handleSave}>
         <input
           type="text"
           name="title"
@@ -82,7 +83,7 @@ const TaskItem = ({ setIsEditing, selectedTask: task, setTasks }) => {
             <option value="in-progress">In-progress</option>
             <option value="completed">Completed</option>
           </select>
-          <div className="flex flex-col items-center">
+          <div className="flex flex-row items-center">
             <button
               type="submit"
               className="mr-2 text-blue-500 cursor-pointer hover:scale-110 duration-300"
@@ -99,6 +100,7 @@ const TaskItem = ({ setIsEditing, selectedTask: task, setTasks }) => {
           </div>
         </div>
       </form>
+      </div>
     </div>
   );
 };
