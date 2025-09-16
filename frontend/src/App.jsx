@@ -20,8 +20,6 @@ const App = () => {
       try {
         const res = await axios.get('/api/v1/auth/authcheck', { withCredentials: true });
         const data = res.data.data;
-        console.log(data);
-        
         if(data.error){
           return null;
         }

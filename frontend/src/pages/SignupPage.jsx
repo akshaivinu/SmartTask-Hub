@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import Button from "../components/Button";
 import useRegister from "../hooks/useRegister";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 const SignupPage = () => {
   const [name, setName] = useState("");
