@@ -5,7 +5,7 @@ export const createTask = async (req, res) => {
     const { title, description, status, dueDate } = req.body;
     const userId = req.user._id;
 
-    if (!title || !description || !status || !dueDate) {
+    if (!title || !description || !status) {
       return res.status(400).json({ message: "All fields are required" });
     }
 
@@ -59,13 +59,6 @@ export const updateTask = async (req, res) => {
     const { title, description, status, dueDate } = req.body;
     if (!id) {
       return res.status(400).json({ message: "Task id is required" });
-    }
-    if (
-      status !== "pending" &&
-      status !== "in-progress" &&
-      status !== "completed"
-    ) {
-      return res.status(400).json({ message: "Invalid status" });
     }
     const task = await Task.findByIdAndUpdate(id, {
       title,

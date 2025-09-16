@@ -7,6 +7,7 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
     "./public/assets/**/*.{js,ts,jsx,tsx}",
+    "node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}", // ✅ Add this
   ],
   theme: {
     extend: {
@@ -84,6 +85,7 @@ export default {
     },
   },
   plugins: [
+    require("flowbite/plugin"), // ✅ Add Flowbite plugin here
     plugin(function ({ addBase, addComponents, addUtilities }) {
       addBase({});
       addComponents({
